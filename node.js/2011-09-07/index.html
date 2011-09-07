@@ -1,0 +1,901 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<title>Node.js</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=1274, user-scalable=no">
+	<link rel="stylesheet" href="themes/shCore.css">
+	<link rel="stylesheet" href="themes/shThemeDefault.css">
+	<link rel="stylesheet" href="themes/ribbon/styles/style.css">
+	<style>
+	    .syntaxhighlighter {
+	        overflow: visible !important;
+	        }
+	    P.reference {
+	        font-size: 16px;
+            position: absolute;
+            left: 178px;
+            bottom: 40px;
+	        }
+	        P.reference A {
+                color: #BBB;
+	            }
+		#Cover H2 {
+		    position: absolute;
+		    bottom: 100px;
+		    right: 100px;
+		    margin: 0;
+		    text-align: right;
+		    font-size: 30px;
+			}
+		#Cover IMG {
+		    max-height: 100%;
+		    }
+	</style>
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>Node.js</h1>
+		<p>Behrang Noroozinia</p>
+	</header>
+	<div class="slide bg" id="Cover"><div>
+		<section>
+			<header>
+				<h2>Behrang Noroozinia<br>September 7, 2011</h2>
+			</header>
+			<img src="pictures/cover.png" alt="Node.js">
+		</section>
+	</div></div>
+	<div class="slide" id="Node.js"><div>
+		<section>
+			<header>
+				<h2>Node.js</h2>
+			</header>
+			<ul>
+			    <li>A set of bindings to the V8 JavaScript VM.</li>
+			    <li>Allowes one to script programs that do I/O in JavaScript.</li>
+			    <li>Focused on performance.</li>
+			    <li>Like a general purpose programming language.</li>
+			    <li>Used on server, client, shell scripting, ...</li>
+			    <li><a href="http://nodejs.org/" target="_blank">http://nodejs.org/</a></li>
+			</ul>
+		</section>
+	</div></div>
+	<div class="slide" id="GoogleV8"><div>
+		<section>
+			<header>
+				<h2>Google V8</h2>
+			</header>
+			<p>Open source JavaScript engine, developed by Google, shipped with Google Chrome browser.</p>
+			<p>Compiles JavaScript to native machine code instead of executing bytecode or interpreting it.</p>
+			<p>Employs optimization techniques for better performance.</p>
+		</section>
+	</div></div>
+	<div class="slide shout" id="DifferentIO"><div>
+		<section>
+			<header>
+				<h2>I/O needs to be done differently</h2>
+			</header>
+		</section>
+	</div></div>
+	<div class="slide" id="WhatIsTheSoftwareDoingWhileItWaits1"><div>
+		<section>
+			<header>
+				<h2>What is the software doing while it queries the database?</h2>
+			</header>
+			<pre class="brush: js; toolbar: false; highlight: 1;">
+			    result = db.query("select * from T");
+			    // use result</pre>
+		</section>
+	</div></div>
+	<div class="slide" id="WhatIsTheSoftwareDoingWhileItWaits2"><div>
+		<section>
+			<header>
+				<h2>What is the software doing while it queries the database?</h2>
+			</header>
+			<pre class="brush: js; toolbar: false; highlight: 1;">
+			    result = db.query("select * from T");
+			    // use result</pre>
+		    <p><mark>In many cases, just waiting for the response.</mark></p>
+		</section>
+	</div></div>
+	<div class="slide" id="ModernComputerLatency"><div>
+		<section>
+			<header>
+				<h2>Modern Computer Latency</h2>
+			</header>
+			<p>
+			    L1: 3 cycles<br>
+			    L2: 14 cycles<br>
+			    RAM: 250 cycles<br>
+			    -----------------------<br>
+		        DISK: 41,000,000 cycles<br>
+		        NETWORK: 240,000,000 cycles<br>
+		    </p>
+		    <p class="reference">
+		        <a href="http://duartes.org/gustavo/blog/post/what-your-computer-does-while-you-wait" target="_blank">
+        	        http://duartes.org/gustavo/blog/post/what-your-computer-does-while-you-wait
+	            </a>
+            </p>
+		</section>
+	</div></div>
+	<div class="slide" id="NonblockingAndBlocking"><div>
+		<section>
+			<header>
+				<h2>Non-blocking and Blocking</h2>
+			</header>
+			<p>
+			    <strong>"Non-blocking"</strong><br>
+			    L1, L2, RAM<br>
+			    -----------------------<br>
+			    <strong>"Blocking"</strong><br>
+		        DISK, NETWORK<br>
+		    </p>
+		</section>
+	</div></div>
+	<div class="slide" id="Multitask"><div>
+		<section>
+			<header>
+				<h2>Multitask</h2>
+			</header>
+			<p>Better software can multitask.</p>
+			<p>Other threads of execution can run while waiting.</p>
+		</section>
+	</div></div>
+	<div class="slide shout" id="IsThatTheBest"><div>
+		<section>
+			<header>
+				<h2>Is that the best that can be done?</h2>
+			</header>
+		</section>
+	</div></div>
+	<div class="slide" id="ApacheNGINXRequestPerSecond"><div>
+		<section>
+			<header>
+				<h2>Apache vs. NGINX - Requests per Second</h2>
+			</header>
+			<img src="pictures/nginx-apache-reqs-sec.png" alt="Comparing Apache and NGINGX by requests per second" class="middle">
+			<p class="reference">
+	            <a href="http://blog.webfaction.com/a-little-holiday-present" target="_blank">
+        	        http://blog.webfaction.com/a-little-holiday-present
+                </a>
+            </p>
+		</section>
+	</div></div>
+	<div class="slide" id="ApacheNGINXMemoryUsage"><div>
+		<section>
+			<header>
+				<h2>Apache vs. NGINX - Memory Usage</h2>
+			</header>
+			<img src="pictures/nginx-apache-memory.png" alt="Comparing Apache and NGINGX by memory usage" class="middle">
+			<p class="reference">
+	            <a href="http://blog.webfaction.com/a-little-holiday-present" target="_blank">
+        	        http://blog.webfaction.com/a-little-holiday-present
+                </a>
+            </p>
+		</section>
+	</div></div>
+	<div class="slide" id="ApacheNGINXDifference"><div>
+		<section>
+			<header>
+				<h2>Apache vs. NGINX - The Difference?</h2>
+			</header>
+			<p>Apache uses <strong>one thread per connection</strong>.</p>
+			<p>NGINX doesn't use threads. It uses an <strong>event loop</strong>.</p>
+		</section>
+	</div></div>
+	<div class="slide" id="EventLoop"><div>
+		<section>
+			<header>
+				<h2>Event Loop</h2>
+			</header>
+			<p>A loop that waits for events (I/O availability, timeout, UI interaction, ...).</p>
+			<p>When an event is available, it will be processed by executing a callback.</p>
+		</section>
+	</div></div>
+	<div class="slide" id="MultithreadProblems"><div>
+		<section>
+			<header>
+				<h2>Multithread Problems</h2>
+			</header>
+			<ul>
+			    <li>Context switching is not free</li>
+			    <li>Execution stacks take up memory</li>
+		    </ul>
+		    <p>For massive concurrency, <strong>cannot</strong> use an OS thread for each connection.</p>
+		</section>
+	</div></div>
+	<div class="slide" id="ThreadsAreEvil"><div>
+		<section>
+			<header>
+				<h2>Threads Are Evil</h2>
+			</header>
+			<blockquote cite="Douglas Crockford">
+			    <ul style="margin-left: 35px;">
+			        <li>In systems programming, threads are a necessary evil.</li>
+			        <li>In application programming, threads are just evil.</li>
+			        <li>Threads provide a deceptively simple model of concurrency.</li>
+			        <li>Threads are subject to races and deadlocks.</li>
+			    </ul>
+			</blockquote>
+		</section>
+	</div></div>
+	<div class="slide" id="MutualExclusion"><div>
+		<section>
+			<header>
+				<h2>Mutual Exclusion</h2>
+			</header>
+			<blockquote cite="Douglas Crockford">
+			    <p>Semaphore, Monitor, Rendezvous, Synchronization</p>
+			    <ul style="margin-left: 35px;">
+			        <li>This used to be operating system stuff.</li>
+			        <li>It has leaked into applications because of networking and the multi-core problem.</li>
+			    </ul>
+			</blockquote>
+		</section>
+	</div></div>
+	<div class="slide" id="BlockingCode"><div>
+		<section>
+			<header>
+				<h2>Blockiong Code</h2>
+			</header>
+			<p>Code like this:</p>
+			<pre class="brush: js; toolbar: false; highlight: 1;">
+			    result = query("select...");
+			    // use result</pre>
+		    <p>either <strong>blocks the entire OS thread</strong> or implies <strong>multiple execution stacks</strong>.</p>
+		</section>
+	</div></div>
+	<div class="slide" id="NonblockingCode"><div>
+		<section>
+			<header>
+				<h2>Non-blockiong Code</h2>
+			</header>
+			<p>But a code like this:</p>
+			<pre class="brush: js; toolbar: false; highlight: 1;">
+			    query("select...", function (result) {
+			        // use result
+			    });</pre>
+		    <p>allows the program to return to the event loop immediately.</p>
+		</section>
+	</div></div>
+	<div class="slide" id="HowIOShouldBeDone"><div>
+		<section>
+			<header>
+				<h2>This is how I/O should be done</h2>
+			</header>
+			<pre class="brush: js; toolbar: false; highlight: 1;">
+			    query("select...", function (result) {
+			        // use result
+			    });</pre>
+		</section>
+	</div></div>
+	<div class="slide" id="WhyNotUsed"><div>
+		<section>
+			<header>
+				<h2>So why isn't everyone using event loops, callbacks, and non-blocking I/O?</h2>
+			</header>
+			<p>For reasons both <strong>cultural</strong> and <strong>infrastructural</strong>.</p>
+		</section>
+	</div></div>
+	<div class="slide" id="CulturalBias1"><div>
+		<section>
+			<header>
+				<h2>Cultural Bias</h2>
+			</header>
+			<p>We're tought I/O with this:</p>
+			<pre class="brush: js; toolbar: false; highlight: 2;">
+			    puts("Enter your name: ");
+			    name = gets();
+			    puts("Name: " + name);</pre>
+		    <p>We're tought to demand input and do nothing until we have it.</p>
+		</section>
+	</div></div>
+	<div class="slide" id="CulturalBias2"><div>
+		<section>
+			<header>
+				<h2>Cultural Bias</h2>
+			</header>
+			<p>Code like</p>
+			<pre class="brush: js; toolbar: false; highlight: 2;">
+			    puts("Enter your name: ");
+			    gets(function (name) {
+			        puts("Name: " + name);
+			    });</pre>
+		    <p>is rejected as too complicated.</p>
+		</section>
+	</div></div>
+	<div class="slide" id="MissingInfrastructure1"><div>
+		<section>
+			<header>
+				<h2>Missing Infrastructure</h2>
+			</header>
+			<p><em>So why isn't everyone using event loops?</em></p>
+		    <p>Single threaded event loops require I/O to be non-blocking.</p>
+		    <p>Most libraries are not.</p>
+		</section>
+	</div></div>
+	<div class="slide" id="MissingInfrastructure2"><div>
+		<section>
+			<header>
+				<h2>Missing Infrastructure</h2>
+			</header>
+			<ul>
+			    <li>POSIX async file I/O not available</li>
+			    <li>MAN pages don't state if a function will access the disk</li>
+			    <li>No closures or anonymous functions in C; makes callbacks difficult</li>
+			    <li>Database libraries (e.g. <code>libmysql_client</code>) do not provide support for asynchronous queries</li>
+			    <li>Asynchronous DNS resolution not standard on most systems</li>
+			</ul>
+		</section>
+	</div></div>
+	<div class="slide" id="TooMuchInfrastructure"><div>
+		<section>
+			<header>
+				<h2>Too Much Infrastructure</h2>
+			</header>
+			<p>EventMachine, Twisted, AnyEvent provide very good event platforms.</p>
+			<p>Easy to create efficent servers.</p>
+			<p>But users are confused how to combine with other available libraries.</p>
+			<p>Users still require expert knowledge of event loops, non-blocking I/O.</p>
+		</section>
+	</div></div>
+	<div class="slide" id="JavaScriptToTheRescue"><div>
+		<section>
+			<header>
+				<h2>JavaScript To The Rescue</h2>
+			</header>
+			<p>JavaScript designed specifically to be used with an event loop:</p>
+			<ul>
+			    <li>Anonymous functions, closures</li>
+			    <li>Only one callback at a time</li>
+			    <li>I/O through DOM event callbacks</li>
+			</ul>
+			<p>The culture of JavaScript is already geared towards evented programming.</p>
+		</section>
+	</div></div>
+	<div class="slide" id="NodeJSProject"><div>
+		<section>
+			<header>
+				<h2>Node.js Project</h2>
+			</header>
+			<p>To provide a <strong>purely evented</strong>, <strong>non-blocking infrastructure</strong> to script <strong>highly concurrent</strong> programs.</p>
+			<p>
+			    <img align="left" src="pictures/ryan-dahl.jpg" alt="Photo of Ryan Dahl" width="200">
+			    <img align="right" src="pictures/Joyent.png" alt="Joyent Logo" width="200">
+			    Created by Ryan Dahl<br>
+			    Sponsored by Joyent
+			</p>
+		</section>
+	</div></div>
+	<div class="slide" id="GitHubPopularProjects"><div>
+		<section>
+			<header>
+				<h2>GitHub's Popular Wached Repositories</h2>
+			</header>
+			<p></p>
+			<img src="pictures/Popular Watched Repositories - GitHub.png" alt="Node.js is second in GitHub's Popular Watched Repositories" height="400" class="middle">
+			<p class="reference">
+			September 3, 2011
+			    <a href="https://github.com/popular/watched" target="_blank">
+			        https://github.com/popular/watched
+			    </a>
+			</p>
+		</section>
+	</div></div>
+	<div class="slide shout" id="Examples"><div>
+		<section>
+			<header>
+				<h2>Examples</h2>
+			</header>
+		</section>
+	</div></div>
+	<div class="slide" id="HelloWorld"><div>
+		<section>
+			<header>
+				<h2>Hello World</h2>
+			</header>
+			<pre class="brush: js; toolbar: false; highlight: 0;">
+			    console.log('hello world');</pre>
+		</section>
+	</div></div>
+	<div class="slide" id="HelloWorldAdvanced1"><div>
+		<section>
+			<header>
+				<h2>Hello World, Advanced!</h2>
+			</header>
+			<pre class="brush: js; toolbar: false; highlight: [1, 3];">
+			    setTimeout(function() {
+			        console.log('world');
+			    }, 2000);
+			    
+			    console.log('hello');</pre>
+		</section>
+	</div></div>
+	<div class="slide" id="HelloWorldAdvanced2"><div>
+		<section>
+			<header>
+				<h2>Hello World, Advanced!</h2>
+			</header>
+			<pre class="brush: js; toolbar: false; highlight: [1, 3];">
+			    setTimeout(function() {
+			        console.log('world');
+			    }, 2000);
+			    
+			    console.log('hello');</pre>
+		    <p>A program which prints "hello", waits 2 seconds, outputs "world", and then exits.</p>
+		    <p>Node exits automatically when there is nothing else to do.</p>
+		</section>
+	</div></div>
+	<div class="slide" id="HelloLoop1"><div>
+		<section>
+			<header>
+				<h2>Hello Loop</h2>
+			</header>
+		    <p>Change the "hello world" program to loop forever, but print an exit message when the user kills it.</p>
+		    <p>Special object <code>process</code> and <code>SIGINT</code> signal should be used.</p>
+		</section>
+	</div></div>
+	<div class="slide" id="HelloLoop2"><div>
+		<section>
+			<header>
+				<h2>Hello Loop</h2>
+			</header>
+			<pre class="brush: js; toolbar: false; highlight: 5;">
+                setInterval(function() {
+                    console.log('hello');
+                }, 500);
+
+                process.addListener('SIGINT', function() {
+                    console.log('goodbye');
+                    process.exit(0);
+                });</pre>
+            <p>The <code>process</code> object emits an event when it receives a signal. Like in the DOM, you need only to add a listener to catch them.</p>
+		</section>
+	</div></div>
+	<div class="slide" id="DNSResolver1"><div>
+		<section>
+			<header>
+				<h2>DNS Resolver</h2>
+			</header>
+		    <p>Write a program which resolves google.com and prints its IP addresses.</p>
+		    <p>Built-in module called <code>dns</code> is for working with DNS.</p>
+		    <p>Resolving DNS takes some time but a lot of APIs let you think things happen instantly.</p>
+		    <p>We can allow the program to continue while it waits for the response.</p>
+		</section>
+	</div></div>
+	<div class="slide" id="DNSResolver2"><div>
+		<section>
+			<header>
+				<h2>DNS Resolver</h2>
+			</header>
+			<pre class="brush: js; toolbar: false; highlight: [1, 5];">
+                var dns = require('dns');
+
+                console.log('resolving google.com...');
+
+                dns.resolve('google.com', function (err, addresses) {
+                    if (err) {
+                        throw err;
+                    }
+                    console.log('found: ', addresses);
+                });</pre>
+		</section>
+	</div></div>
+	<div class="slide" id="DNSResolver3"><div>
+		<section>
+			<header>
+				<h2>DNS Resolver</h2>
+			</header>
+		    <p>It runs very quickly. But millions of clock cycles passed.</p>
+		    <p>We can't perceive 2 microseconds.</p>
+		    <p>In a server environment, since handling many clients, waiting millions of clock cycles is wasteful.</p>
+		</section>
+	</div></div>
+	<div class="slide" id="SimpleHTTPServer"><div>
+		<section>
+			<header>
+				<h2>A Simple HTTP Server</h2>
+			</header>
+			<pre class="brush: js; toolbar: false; highlight: [3, 9];">
+                var http = require('http');
+
+                var s = http.createServer(function (req, res) {
+                    res.writeHead(200);
+                    res.end('hello world\n');
+                });
+
+                // listen on port 8000
+                s.listen(8000);</pre>
+		</section>
+	</div></div>
+	<div class="slide" id="StreamingHTTPServer"><div>
+		<section>
+			<header>
+				<h2>Streaming HTTP Server</h2>
+			</header>
+			<pre class="brush: js; toolbar: false; highlight: [6, 7, 8, 11];">
+                var http = require('http');
+
+                http.createServer(function (req, res) {
+                    res.writeHead(200);
+                    
+                    setTimeout(function () {
+                        res.end('world\n');
+                    }, 2000);
+                    
+                    res.write('hello\n');
+                }).listen(8000);</pre>
+		</section>
+	</div></div>
+	<div class="slide" id="WebBasedDNSResolver1"><div>
+		<section>
+			<header>
+				<h2>Web Based DNS Resolver</h2>
+			</header>
+			Requesting <code>http://localhost:8000/yahoo.com</code> should return:
+			<pre><code>query: yahoo.com</code>
+			<code>["98.137.149.56","209.191.122.70","67.195.160.76"]</code></pre>
+			Requesting <code>http://localhost:8000/google.com</code> should return:
+			<pre><code>query: google.com</code>
+			<code>["74.125.39.99","74.125.39.103","74.125.39.104"]</code></pre>
+		</section>
+	</div></div>
+	<div class="slide" id="WebBasedDNSResolver2"><div>
+		<section>
+			<header>
+				<h2>Web Based DNS Resolver</h2>
+			</header>
+			<pre class="brush: js; toolbar: false; highlight: [8, 9, 10];">
+                var http = require('http');
+                var dns = require('dns');
+
+                http.createServer(function (req, res) {
+                    var query = req.url.replace('/', '');
+                    res.write('query: ' + query + '\n');
+                    
+                    dns.resolve(query, function (err, addresses) {
+                        res.end(JSON.stringify(addresses) + '\n');
+                    });
+                    
+                }).listen(8000);</pre>
+		</section>
+	</div></div>
+	<div class="slide" id="WebBasedDNSResolver3"><div>
+		<section>
+			<header>
+				<h2>Web Based DNS Resolver</h2>
+			</header>
+			<ul>
+			    <li>DNS resolution is async</li>
+			    <li>HTTP server "streams" the response</li>
+			</ul>
+			<p>The overhead of each connection is low so the server is able to achive good concurrency: it juggles many connections at a time.</p>
+		</section>
+	</div></div>
+	<div class="slide" id="TCPServer1"><div>
+		<section>
+			<header>
+				<h2>TCP Server</h2>
+			</header>
+			<p>Write a program which:</p>
+			<ul>
+			    <li>Starts a TCP server on port 8000</li>
+			    <li>Sends the peer a message</li>
+			    <li>Closes the connection</li>
+			</ul>
+		</section>
+	</div></div>
+	<div class="slide" id="TCPServer2"><div>
+		<section>
+			<header>
+				<h2>TCP Server</h2>
+			</header>
+			<pre class="brush: js; toolbar: false; highlight: 3;">
+                var net = require('net');
+
+                net.createServer(function (socket) {
+                    socket.end('Goodbye\n');
+                }).listen(8000);</pre>
+		</section>
+	</div></div>
+	<div class="slide" id="TCPChatServer"><div>
+		<section>
+			<header>
+				<h2>TCP Chat Server</h2>
+			</header>
+			<pre class="brush: js; toolbar: false; highlight: [3, 6, 10];">
+                var net = require('net');
+
+                var people = [];
+                
+                net.createServer(function (socket) {
+                    people.push(socket);
+                    socket.on('data', function (data) {
+                        people.forEach(function (person) {
+                            if (person != socket && person.writable)
+                                person.write(data);
+                        });
+                    });
+                }).listen(8000);</pre>
+		</section>
+	</div></div>
+	<div class="slide" id="TCPChatServerWithHTTPView"><div>
+		<section>
+			<header>
+				<h2>TCP Chat Server With HTTP View</h2>
+			</header>
+			<pre class="brush: js; toolbar: false; highlight: 6;">
+                var http = require('http');
+			    // ... TCP chat server code omitted
+			    // ... it is listening on 8000
+                http.createServer(function (req, res) {
+                    res.writeHead(200);
+                    people.push(res);
+                }).listen(8001);</pre>
+            <p>A single process is listening on both 8000 and 8001 ports, and everything is handled because node.js has non-blocking I/O.</p>
+		</section>
+	</div></div>
+	<div class="slide" id="NPM"><div>
+		<section>
+			<header>
+				<h2>Node.js Package Manager</h2>
+			</header>
+			<p>
+			    <img src="pictures/npm.png" alt="NPM Logo" align="right" width="300">
+			    <code>npm</code> is a package manager for node. You can use it to install and publish your node programs. It manages dependencies and does other cool stuff.
+		    </p>
+			<pre><code>curl http://npmjs.org/install.sh | sh</code></pre>
+			<p class="reference">
+			    <a href="http://npmjs.org/" target="_blank">
+			        http://npmjs.org/
+		        </a>
+			</p>
+		</section>
+	</div></div>
+	<div class="slide" id="NPMUsage"><div>
+		<section>
+			<header>
+				<h2>NPM Usage</h2>
+			</header>
+			<pre><code>npm install -g connect</code></pre>
+		</section>
+	</div></div>
+	<div class="slide" id="Connect"><div>
+		<section>
+			<header>
+				<h2>Connect</h2>
+			</header>
+			<ul>
+			    <li>Node.js is very powerful but handling everything in web like cookie, session, logging is hard.</li>
+			    <li>Connect is an extensible HTTP server framework for node, providing high performance "plugins" known as middleware.</li>
+			    <li>Connect is bundled with over 14 commonly used middleware, including a logger, session support, cookie parser, and more.</li>
+			</ul>
+			<p class="reference">
+			    <a href="http://senchalabs.github.com/connect/" target="_blank">
+			        http://senchalabs.github.com/connect/
+		        </a>
+			</p>
+		</section>
+	</div></div>
+	<div class="slide" id="ConnectSample"><div>
+		<section>
+			<header>
+				<h2>Connect Sample</h2>
+			</header>
+			<pre class="brush: js; toolbar: false; highlight: 0;">
+                var connect = require('connect');
+
+                connect.createServer(
+                    connect.static(__dirname + '/public'),
+                    connect.favicon(),
+                    connect.logger(),
+                    connect.errorHandler(),
+                    connect.bodyParser(),
+                    connect.cookieParser(),
+                    connect.session({'secret': 'password'})
+                ).listen(8000);</pre>
+		</section>
+	</div></div>
+	<div class="slide" id="Express"><div>
+		<section>
+			<header>
+				<h2>Express</h2>
+			</header>
+			<ul>
+			    <li>High performance, high class web development for Node.js</li>
+			    <li>It's like Sinatra from the Ruby world</li>
+			</ul>
+			<pre class="brush: js; toolbar: false; highlight: 3;">
+                var express = require('express');
+                var app = express.createServer();
+                app.get('/', function(req, res){
+                    res.send('Hello World');
+                });
+                app.listen(3000);</pre>
+			<p class="reference">
+			    <a href="http://expressjs.com/" target="_blank">
+			        http://expressjs.com/
+		        </a>
+			</p>
+		</section>
+	</div></div>
+	<div class="slide" id="ExpressFeatures"><div>
+		<section>
+			<header>
+				<h2>Express Features</h2>
+			</header>
+			<ul>
+			    <li>Robust routing</li>
+			    <li>Redirection helpers</li>
+			    <li>Dynamic view helpers</li>
+			    <li>Content negotiation</li>
+			    <li>View rendering and partials support</li>
+			    <li>Session based flash notifications</li>
+			    <li>Built on Connect</li>
+			</ul>
+		</section>
+	</div></div>
+	<div class="slide shout" id="ParallelProgramming"><div>
+		<section>
+			<header>
+				<h2>Parallel Programming</h2>
+			</header>
+		</section>
+	</div></div>
+	<div class="slide" id="Node.jsAndMultiCore"><div>
+		<section>
+			<header>
+				<h2>Node.js And Multicore CPUs</h2>
+			</header>
+			<p>Node.js is inherently single threaded (and arguably JavaScript too).</p>
+			<p>Single threaded means that a Node process can only use one core.</p>
+			<p>Node is good at <strong>concurrency</strong>, but how to run code in <strong>parallel</strong> with it?</p>
+		</section>
+	</div></div>
+	<div class="slide" id="RunningCodeInParallel"><div>
+		<section>
+			<header>
+				<h2>Running Code in Parallel</h2>
+			</header>
+			<ul>
+			    <li>Use processes</li>
+			    <li>Pass messages</li>
+			    <li>Allow the OS scheduler to run processes</li>
+			</ul>
+			<p>Node's focus on asynchronous networking makes IPC easy, and thus parallel programming easy.</p>
+		</section>
+	</div></div>
+	<div class="slide" id="WebWorkers"><div>
+		<section>
+			<header>
+				<h2>Web Workers</h2>
+			</header>
+			<ul>
+			    <li>An HTML5 spec adapted for node.js</li>
+			    <li>Each worker is a real OS process</li>
+			    <li>Communicate with each other through sockets</li>
+			    <li>Each process is able to send and receive messages (actor-style)</li>
+			    <li>Useful to take heavy calculations out of a server</li>
+			</ul>
+		</section>
+	</div></div>
+	<div class="slide" id="WebWorkersExample"><div>
+		<section>
+			<header>
+				<h2>Web Workers Example</h2>
+			</header>
+			<pre class="brush: js; toolbar: false; highlight: [1, 3, 5];">
+                var w = new Worker('fib.js');
+                
+                w.postMessage({ calculate: 10 });
+                
+                w.onmessage = function(m) {
+                   console.log('result: %j', m);
+                    w.terminate();
+                };</pre>
+		</section>
+	</div></div>
+	<div class="slide" id="AcceptConnectionsOnMultipleCores"><div>
+		<section>
+			<header>
+				<h2>How to accept connections on multiple cores?</h2>
+			</header>
+			<ul>
+			    <li>Spawn a copy of yourself N times</li>
+			    <li>Send the server file descriptor to your clones</li>
+			    <li>Accept connections in each process</li>
+			</ul>
+			<p>Effectively allowes the kernel to load balance connections across processes.</p>
+		</section>
+	</div></div>
+	<div class="slide" id="ParentProcess"><div>
+		<section>
+			<header>
+				<h2>Parent Process</h2>
+			</header>
+			<pre class="brush: js; toolbar: false; highlight: [11, 13];">
+                var http = require('http');
+                var net = require('net');
+                // Create a web server
+                var web = http.Server(function (req, res) {
+                    res.writeHead(200);
+                    res.end('hello world\n');
+                });
+                web.listen(8000);
+                // File Descriptor server
+                net.Server(function (c) {
+                    c.write('blah', 'ascii', web.fd);
+                    c.end();
+                }).listen('/tmp/node_server.sock');</pre>
+		</section>
+	</div></div>
+	<div class="slide" id="ChildProcess"><div>
+		<section>
+			<header>
+				<h2>Child Process</h2>
+			</header>
+			<pre class="brush: js; toolbar: false; highlight: [9, 11];">
+                var http = require('http');
+                var net = require('net');
+
+                var web = http.Server(function (req, res) {
+                    res.writeHead(200);
+                    res.end('hello from ' + process.pid + '\n');
+                });
+                
+                var c = net.createConnection('/tmp/node_server.sock');
+                c.on('fd', function (fd) {
+                    web.listenFD(fd);
+                });</pre>
+		</section>
+	</div></div>
+	<div class="slide" id="Cluster"><div>
+		<section>
+			<header>
+				<h2>Cluster</h2>
+			</header>
+			<p>Extensible multi-core server management for nodejs.</p>
+			<p class="reference">
+			    <a href="http://learnboost.github.com/cluster/" target="_blank">
+			        http://learnboost.github.com/cluster/
+		        </a>
+	        </p>
+		</section>
+	</div></div>
+	<div class="slide" id="References"><div>
+		<section>
+			<header>
+				<h2>References</h2>
+			</header>
+			<ul style="font-size: 20px;">
+				<li><a href="http://nodejs.org/">http://nodejs.org/</a></li>
+				<li><a href="http://howtonode.org/">http://howtonode.org/</a></li>
+				<li><a href="http://npmjs.org/">http://npmjs.org/</a></li>
+				<li><a href="http://senchalabs.github.com/connect/">http://senchalabs.github.com/connect/</a></li>
+				<li><a href="http://expressjs.com/">http://expressjs.com/</a></li>
+				<li><a href="http://learnboost.github.com/cluster/">http://learnboost.github.com/cluster/</a></li>
+				<li><a href="https://github.com/popular/watched">https://github.com/popular/watched</a></li>
+				<li><a hre="http://duartes.org/gustavo/blog/post/what-your-computer-does-while-you-wait">http://duartes.org/gustavo/blog/post/what-your-computer-does-while-you-wait</a></li>
+				<li><a href="http://blog.webfaction.com/a-little-holiday-present">http://blog.webfaction.com/a-little-holiday-present</a></li>
+			</ul>
+		</section>
+	</div></div>
+	<div class="slide" id="ThankYou"><div>
+		<section>
+			<header>
+				<h2>Thank You</h2>
+			</header>
+			<p>Questions?</p>
+			<p>&nbsp;</p>
+			<p>Presentation powered by <a href="https://github.com/pepelsbey/shower" target="_blank">Shower</a></p>
+		</section>
+	</div></div>
+	<div class="progress"><div></div></div>
+	<script src="scripts/script.js"></script>
+	<script src="scripts/shCore.js"></script>
+	<script src="scripts/shBrushJScript.js"></script>
+	<script>SyntaxHighlighter.all();</script>
+	<!-- Copyright © 2011 Behrang Noroozinia, http://github.com/behrang -->
+</body>
+</html>
