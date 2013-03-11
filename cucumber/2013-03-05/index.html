@@ -7,7 +7,6 @@
 	<link rel="stylesheet" href="sh/shCore.css">
 	<link rel="stylesheet" href="sh/shThemeDefault.css">
 	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
-	<link rel="stylesheet" href="shower/themes/ribbon/styles/print.css" media="print">
 	<!--
 		To apply styles to the certain slides
 		set slide ID to get needed elements
@@ -17,17 +16,22 @@
       overflow: visible !important;
       }
 
-		#Cover h2 {
+		#Cover h2, #BackToCucumber h2 {
 			margin:420px 0 0;
 			color:#373;
 			font-size:70px;
+			text-shadow: 0px 2px 2px rgba(150, 150, 150, 1);
 			}
 		#Cover p {
 			color: #373;
+			text-shadow: 0px 2px 2px rgba(150, 150, 150, 1);
 		}
 		#Picture h2 {
 			color:#FFF;
 			}
+		.slide pre code:before {
+			content: '';
+		}
 	</style>
 </head>
 <body class="list">
@@ -40,20 +44,429 @@
 		<p>March 5, 2013</p>
 		<img src="pictures/cucumber.jpg" alt="" width="100%">
 	</div></section>
-	<section class="slide shout"><div>
-		<h2>Cucumber is good for your &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; health!</h2>
-	</div></section>
-	<section class="slide shout"><div>
-		<h2>Cucumber is good for your software's health!</h2>
+	<section class="slide"><div>
+		<h2>Cucumber</h2>
+		<p>Cucumber is a <b>B</b>ehavior-<b>D</b>riven <b>D</b>evelopment tool.</p>
 	</div></section>
 	<section class="slide"><div>
-		<h2>Cucumber &amp; Gherkin</h2>
-		<p>Cucumber is a <b>tool</b> that executes <b>plain-text</b> functional descriptions as <b>automated</b> tests.</p>
-		<p>The language that Cucumber understands is called <b>Gherkin</b></p>
+		<h2>What is BDD?</h2>
+		<ul>
+			<li>a software development process</li>
+			<li>based on test-driven development</li>
+			<li>combines TDD with DDD and OOAD</li>
+			<li>provides a shared collaboration tool for developers and business analysts</li>
+		</ul>
+	</div></section>
+	<section class="slide"><div>
+		<h2>BDD History</h2>
+		<p>Developed by <b>Dan North</b></p>
+		<img src="pictures/GOTO_Dan_North_BW.png" alt="Dan North, Agile Troublemaker, Developer, Originator of BDD">
+	</div></section>
+	<section class="slide"><div>
+		<h2>BDD History</h2>
+		<p>As a response to TDD issues:</p>
+		<ul>
+			<li>Where to start in the process</li>
+			<li>What to test and what not to test</li>
+			<li>How much to test in one go</li>
+			<li>What to call the tests</li>
+			<li>How to understand why a test fails</li>
+		</ul>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Behavioral Specifications</h2>
+		<ol>
+			<li>Unit tests should be specified in terms of the desired behavior (business requirement).</li>
+			<li>Behavior should be specified in terms of user storeis.</li>
+		</ol>
+	</div></section>
+	<section class="slide shout"><div>
+		<h3>User Story Structure</h3>
+		<ol>
+			<li class="next">Title</li>
+			<li class="next">Narrative
+				<ul>
+					<li>As a [role]</li>
+					<li>I want [feature]</li>
+					<li>so that [benefit]</li>
+				</ul>
+			</li>
+			<li class="next">Acceptance criteria or scenarios
+				<ul>
+					<li>Given</li>
+					<li>When</li>
+					<li>Then</li>
+				</ul>
+			</li>
+		</ol>
+	</div></section>
+	<section class="slide shout"><div>
+		<pre class="brush: gherkin; gutter: false;">
+			Story: Returns go to stock
+
+			In order to keep track of stock
+			As a store owner
+			I want to add items back to stock when they're returned
+
+			Scenario 1: Refunded items should be returned to stock
+			Given a customer previously bought a black sweater from me
+			And I currently have three black sweaters left in stock
+			When he returns the sweater for a refund
+			Then I should have four black sweaters in stock
+
+			Scenario 2: Replaced items should be returned to stock
+			Given that a customer buys a blue garment
+			And I have two blue garments in stock
+			And three black garments in stock.
+			When he returns the garment for a replacement in black,
+			Then I should have three blue garments in stock
+			And two black garments in stock</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Tests</h2>
+		<p>TDD tools: free-format</p>
+		<p>BDD tools: linked to ubiquitous language</p>
+	</div></section>
+	<section class="slide"><div>
+		<h2>BDD Tools</h2>
+		<p>They make same requirements documents executable.</p>
+	</div></section>
+	<section class="slide cover" id="BackToCucumber"><div>
+		<h2>Back to Cucumber</h2>
+		<img src="pictures/cucumber.jpg" alt="" width="100%">
+	</div></section>
+	<section class="slide"><div>
+		<h2>Cucumber</h2>
+		<p>Developed by <b>Aslak Hellesøy</b> originally for Ruby</p>
+		<img src="pictures/aslak.jpg" alt="Aslak Hellesøy" width="300">
+	</div></section>
+	<section class="slide"><div>
+		<h2>Cucumber Implementations</h2>
+		<ul>
+			<li>cucumber (Ruby)</li>
+			<li>cucumber-js (JavaScript &amp; CoffeeScript)</li>
+			<li>cucumber-jvm (Java)</li>
+			<li>cucumber-cpp (C++)</li>
+			<li>cucumber-lua (Lua)</li>
+			<li>...</li>
+		</ul>
+	</div></section>
+	<section class="slide"><div>
+		<h2>cucumber.js</h2>
+		<p>Developed by Julien Biezemans</p>
+		<img src="pictures/julien.png" alt="Aslak Hellesøy" width="300">
+	</div></section>
+	<section class="slide"><div>
+		<h2>Install cucumber.js</h2>
+		<pre class="brush: plain;">
+			npm install cucumber -g</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Gherkin</h2>
+		<img src="pictures/large_FairGherkin.jpg" alt="Gherkin" width="300" align="right">
+		<p>User stories should be written in gherkin format.</p>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Gherkin Sample</h2>
+		<pre class="brush: gherkin;">
+			Feature: Google for Cucumber
+			  In order to get more info about Cucumber
+			  As a BDDer
+			  I want to find Cucumber resources on Google
+
+			  Scenario: find cukes.info
+			    Given I am on Google
+			    When I search for "Cucumber BDD"
+			    Then I see a link to "http://cukes.info/"</pre>
+		<p class="note">Paste in features/google.feature</p>
+	</div></section>
+	<section class="slide shout"><div>
+		<pre class="brush: plain; highlight: [2, 9, 10, 11, 12]">
+			$ cucumber.js
+			UUU
+
+			1 scenario (1 undefined)
+			3 steps (3 undefined)
+
+			You can implement step definitions for undefined steps with these snippets:
+
+			this.Given(/^I am on Google$/, function(callback) {
+			  // express the regexp above with the code you wish you had
+			  callback.pending();
+			});
+
+			this.When(/^I search for "([^"]*)"$/, function(arg1, callback) {
+			  // express the regexp above with the code you wish you had
+			  callback.pending();
+			});
+
+			...</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Step Definition</h2>
+		<p>Glue between features written in Gherkin and the actual SUT.</p>
+		<pre class="brush: js;">
+			module.exports = function () {
+
+			  this.Given(/^I am on Google$/, function(callback) {
+			    // express the regexp above with the code you wish you had
+			    callback.pending();
+			  });
+			  
+			};</pre>
+			<p class="note">Paste in features/step_definitions/google.js</p>
+	</div></section>
+	<section class="slide shout"><div>
+		<pre class="brush: plain; highlight: [2, 5]">
+			$ cucumber.js
+			PUU
+
+			1 scenario (1 undefined)
+			3 steps (2 undefined, 1 pending)
+
+			You can implement step definitions for undefined steps with these snippets:
+
+			this.When(/^I search for "([^"]*)"$/, function(arg1, callback) {
+			  // express the regexp above with the code you wish you had
+			  callback.pending();
+			});
+
+			this.Then(/^I see a link to "([^"]*)"$/, function(arg1, callback) {
+			  // express the regexp above with the code you wish you had
+			  callback.pending();
+			});</pre>
+	</div></section>
+	<section class="slide shout"><div>
+		<pre class="brush: plain;">
+			module.exports = function () {
+
+			  this.Given(/^I am on Google$/, function(callback) {
+			    // express the regexp above with the code you wish you had
+			    callback.pending();
+			  });
+
+			  this.When(/^I search for "([^"]*)"$/, function(arg1, callback) {
+			    // express the regexp above with the code you wish you had
+			    callback.pending();
+			  });
+
+			  this.Then(/^I see a link to "([^"]*)"$/, function(arg1, callback) {
+			    // express the regexp above with the code you wish you had
+			    callback.pending();
+			  });
+			  
+			};</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Pending For Implementation</h2>
+		<pre class="brush: plain; highlight: [2, 4, 5]">
+			$ cucumber.js
+			P--
+
+			1 scenario (1 pending)
+			3 steps (1 pending, 2 skipped)</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Browser Simulator</h2>
+		<p>"Given I am on Google" needs a browser! Or a browser simulator!</p>
+		<p>Some of the more popular choices:</p>
+		<ul>
+			<li>PhantomJS (Headless WebKit)</li>
+			<li>Selenium (Real web browser automator)</li>
+			<li>Zombie (Insanely fast, headless browser)</li>
+		</ul>
+	</div></section>
+	<section class="slide"><div>
+		<h2>PhantomJS</h2>
+		<p>Install manually, or use npm:</p>
+		<pre class="brush: plain;">
+			npm install phantomjs -g</pre>
+		<p>Then run PhantomJS with:</p>
+		<pre class="brush: bash;">
+			phantomjs --webdriver=4444</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>WebDriver</h2>
+		<ul>
+			<li>Selenium protocol for talking to browsers</li>
+			<li>Implemented in PhantomJS (Ghost Driver)</li>
+			<li>wd is one of the JS implementations:</li>
+		</ul>
+		<pre class="brush: plain;">
+			npm install wd --save-dev</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Given I am on Google</h2>
+		<pre class="brush: js; highlight: [6, 10]">
+			module.exports = function () {
+
+			  var browser;
+
+			  this.Given(/^I am on Google$/, function(callback) {
+			    browser = require('wd').remote();
+			    browser.on('status', console.log);
+			    browser.on('command', console.log);
+			    browser.init(function () {
+			      browser.get('http://google.com', callback);
+			    });
+			  });
+
+			  ...</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Given I am on Google, Passes!</h2>
+		<pre class="brush: plain; highlight: [6, 9]">
+			$ cucumber.js
+
+			Driving the web on session: a4168050-8a24-11e2-81f1-e98c10564ba0
+
+			POST /session/:sessionID/url { url: 'http://google.com' }
+			.P-
+
+			1 scenario (1 pending)
+			3 steps (1 pending, 1 skipped, 1 passed)</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Improve Readability</h2>
+		<p>Replace RegExp:</p>
+		<pre class="brush: js; highlight: [6, 10]">
+		  this.Given(/^I am on Google$/, function(callback) {</pre>
+		<p>With simple string:</p>
+		<pre class="brush: js; highlight: [6, 10]">
+		  this.Given('I am on Google', function(callback) {</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>When I search for "Cucumber BDD"</h2>
+		<pre class="brush: js; highlight: [1, 3]">
+		  this.When('I search for "$query"', function(query, callback) {
+		    browser.elementByName('q', function (err, el) {
+		      el.type(query + '\n', callback);
+		    });
+		  });</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Second Step Passes</h2>
+		<pre class="brush: plain; highlight: [1, 9, 10, 15]">
+			$ cucumber.js -f pretty
+			Feature: Google for Cucumber
+			  Scenario: find cukes.info
+
+			Driving the web on session: c2c11e90-8a27-11e2-81f1-e98c10564ba0
+
+			POST /session/:sessionID/url { url: 'http://google.com' }
+			    Given I am on Google
+			POST /session/:sessionID/element { using: 'name', value: 'q' }
+			POST /session/:sessionID/element/:wdc:1362991417552/value { value: [ 'Cucumber BDD\n' ] }
+			    When I search for "Cucumber BDD"
+			    Then I see a link to "http://cukes.info/"
+
+			1 scenario (1 pending)
+			3 steps (1 pending, 2 passed)</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Then I see a link to "http://cukes.info/"</h2>
+		<pre class="brush: js; highlight: [2, 5]">
+	    this.Then('I see a link to "$url"', function(url, callback) {
+		    browser.waitForElementByCss(
+		    		'a[href*="' + url + '"]', 5000, function (err, el) {
+		      if (err) {
+		        callback.fail();
+		      } else {
+		        browser.quit();
+		        callback();
+		      }
+		    });
+		  });</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Scenario Passes</h2>
+		<pre class="brush: plain; highlight: [15, 16]">
+			$ cucumber.js
+
+			Driving the web on session: bcb35250-8a33-11e2-81f1-e98c10564ba0
+
+			POST /session/:sessionID/url { url: 'http://google.com' }
+			.POST /session/:sessionID/element { using: 'name', value: 'q' }
+			POST /session/:sessionID/element/:wdc:1362996561183/value { value: [ 'Cucumber BDD\n' ] }
+			.POST /session/:sessionID/elements { using: 'css selector',
+			  value: 'a[href*="http://cukes.info/"]' }
+			POST /session/:sessionID/elements { using: 'css selector',
+			  value: 'a[href*="http://cukes.info/"]' }
+			DELETE /session/:sessionID undefined
+			.
+
+			1 scenario (1 passed)
+			3 steps (3 passed)</pre>
+	</div></section>
+	<section class="slide shout"><div>
+		<pre class="brush: js; highlight: []">
+		  module.exports = function () {
+			  var browser;
+			  this.Given('I am on Google', function(callback) {
+			    browser = require('wd').remote();
+			    browser.init(function () {
+			      browser.get('http://google.com', callback);
+			    });
+			  });
+			  this.When('I search for "$query"', function(query, callback) {
+			    browser.elementByName('q', function (err, el) {
+			      el.type(query + '\n', callback);
+			    });
+			  });
+			  this.Then('I see a link to "$url"', function(url, callback) {
+			    browser.waitForElementByCss('a[href*="' + url + '"]', 5000, function (err, el) {
+			      if (err) {callback.fail();} else {browser.quit();callback();}
+			    });
+			  });
+			};</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Green like a cuke!</h2>
+		<pre class="brush: plain; highlight: []">
+			$ cucumber -f pretty
+
+			Feature: Google for Cucumber
+			  In order to get more info about Cucumber
+			  As a BDDer
+			  I want to find Cucumber resources on Google
+
+
+			  Scenario: find cukes.info                   # features/google.feature:6
+			    Given I am on Google                      # features/google.feature:7
+			    When I search for "Cucumber BDD"          # features/google.feature:8
+			    Then I see a link to "http://cukes.info/" # features/google.feature:9
+
+			1 scenario (1 passed)
+			3 steps (3 passed)</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>World</h2>
+		<p>Constructor function with utility properties, used in step definitions.</p>
+		<p>Value of <code>this</code> in step definitions.</p>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Hooks</h2>
+		<ul>
+			<li>Before</li>
+			<li>After</li>
+			<li>Around</li>
+		</ul>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Declarative vs. Imperative</h2>
+		<blockquote>
+			<p>The scenarios are ideally phrased declaratively rather than imperatively - in the business language, with no reference to elements of the UI through which the interactions take place.</p>
+		</blockquote>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Cucumber &amp; Documentation</h2>
+		<blockquote>
+			<p>Cucumber features are living documentation</p>
+		</blockquote>
 	</div></section>
 	<section class="slide"><div>
 		<h2>Gherkin Example 1</h2>
-		<pre class="brush: gherkin; toolbar: false;">
+		<pre class="brush: gherkin;">
 			Feature: Google for Cucumber
 			  In order to get more info about Cucumber
 			  As a BDDer
@@ -66,7 +479,7 @@
 	</div></section>
 	<section class="slide"><div>
 		<h2>Gherkin Example 2</h2>
-		<pre class="brush: gherkin; toolbar: false;">
+		<pre class="brush: gherkin;">
 			Feature: Search courses
 			  In order to ensure better utilization of courses
 			  Potential students should be able to search for courses
@@ -83,148 +496,79 @@
 			      | B205        |</pre>
 	</div></section>
 	<section class="slide"><div>
-		<h2>Format Advantages</h2>
-		<ul>
-			<li>Easy to read</li>
-			<li>Easy to understand</li>
-			<li>Easy to discuss</li>
-			<li>Easy to parse</li>
-		</ul>
-	</div></section>
-	<section class="slide shout"><div>
-		<h2>BDD</h2>
+		<h2>Integration, System and Acceptance Tests</h2>
+		<p>Cucumber is better used for end to end (integration or system) testing.</p>
+		<p>Use cucumber for acceptance tests of user stories.</p>
+		<p>Don't use for unit tests.</p>
 	</div></section>
 	<section class="slide"><div>
-		<h2>What's the difference?</h2>
+		<h2>Agile Process</h2>
 		<ul>
-			<li>Develop the <i>right</i> thing</li>
-			<li>Develop the thing <i>right</i></li>
+			<li>Create .feature files (red)</li>
+			<li>Define steps in .js (or .coffee) files (yellow)</li>
+			<li>TDD each unit to make the next cucumber step pass (green)</li>
+			<li>Continue this process</li>
 		</ul>
 	</div></section>
 	<section class="slide"><div>
-		<h2>What's the difference?</h2>
-		<ul>
-			<li>Develop the <i>right</i> thing: <b>BDD</b></li>
-			<li>Develop the thing <i>right</i>: <b>TDD</b></li>
-		</ul>
-	</div></section>
-	<section class="slide"><div>
-		<h2>What's the difference?</h2>
-		<ul>
-			<li>Develop the <i>right</i> thing: <b>BDD</b></li>
-			<li>Develop the thing <i>right</i>: <b>TDD</b></li>
-		</ul>
-		<p>Both are good and required, but BDD should be first.</p>
-	</div></section>
-
-
-
-
-
-	<section class="slide" data-timing="00:05"><div>
-		<h2>Slide with timer</h2>
-		<p>It will change right in five seconds</p>
-		<footer>
-			Presenter note for the first slide
-		</footer>
-	</div></section>
-	<section class="slide"><div>
-		<h2>Heading</h2>
-		<p>In your slides text you can use <a href="http://google.com/">links</a> and various inline elements for <em>emotional</em> and <strong>strong</strong> emphasis or just for <i>italic</i> or <b>bold</b> decoration. <code>&lt;code&gt;</code> is used for inline code samples.</p>
-		<footer>
-			Presenter note for the second slide
-		</footer>
-	</div></section>
-	<section class="slide"><div>
-		<h2>Two rows.<br> Mighty heading</h2>
-		<p>You can use two lines header but it would reduce space on a slide. The “Ribbon” theme is designed for seven lines of code after one-line header by default.</p>
-		<p class="note">This paragraph could be used as a footnote</p>
-	</div></section>
-	<section class="slide"><div>
-		<h2>Various lists</h2>
-		<ul>
-			<li>Simple lists are marked with bullets.</li>
-			<li>Ordered lists begin with a number.</li>
-			<li>You can even nest lists one inside another.
-				<ol>
-					<li>Or mix their types.</li>
-					<li>But do not go too far.</li>
-					<li>Otherwise audience will be bored.</li>
-				</ol>
-			</li>
-			<li>Look, seven rows exactly!</li>
-		</ul>
-	</div></section>
-	<section class="slide"><div>
-		<h2>Serious citation</h2>
-		<figure>
-			<blockquote>
-				<p>You can wrap one or more paragraphs into citation, which will make text italic and add a nice quote on the left. Giving the citation source would make it even more serious.</p>
-			</blockquote>
-			<figcaption>Vadim Makeev</figcaption>
-		</figure>
-	</div></section>
-	<section class="slide"><div>
-		<h2>When you have a lot of code</h2>
-		<pre>
-			<code>&lt;html lang="en"&gt;</code>
-			<code><mark>&lt;head&gt;</mark> <mark class="comment">&lt;!--Comment--&gt;</mark></code>
-			<code>    &lt;title&gt;Shower&lt;/title&gt;</code>
-			<code>    &lt;meta charset="<mark class="important">UTF-8</mark>"&gt;</code>
-			<code>    &lt;link rel="stylesheet" href="s/screen.css"&gt;</code>
-			<code>    &lt;script src="j/jquery.js"&gt;&lt;/script&gt;</code>
-			<code><mark>&lt;/head&gt;</mark></code>
+		<h2>I18N</h2>
+		<pre dir="rtl">
+			<code>ویژگی: جستجوی خیار در گوگل</code>
+			<code>&nbsp; برای این که بیشتر درباره خیار بدانم</code>
+			<code>&nbsp; به عنوان یک کاربر BDD</code>
+			<code>&nbsp; میخواهم که در گوگل منابع خیار را پیدا کنم</code>
+			<code>&nbsp;</code>
+			<code>&nbsp; سناریو: جستجوی cukes.info</code>
+			<code>&nbsp; &nbsp; با فرض من در گوگل هستم</code>
+			<code>&nbsp; &nbsp; هنگامی من "Cucumber BDD" را جستجو میکنم</code>
+			<code>&nbsp; &nbsp; آنگاه من یک پیوند به "http://cukes.info" میبینم</code>
 		</pre>
 	</div></section>
 	<section class="slide"><div>
-		<h2>Code in separate blocks</h2>
-		<pre>
-			<code><mark>&lt;html</mark> lang="en"&gt;</code>
-		</pre>
-		<p class="note">Now you can add a note for each block</p>
-		<pre>
-			<code><mark>&lt;meta</mark> charset="<mark>UTF-8</mark>"&gt;</code>
-		</pre>
-		<p class="note">And explain what is interesting about it</p>
-	</div></section>
-	<section class="slide shout"><div>
-		<h2>You can shout<br> this way</h2>
-	</div></section>
-	<section class="slide cover" id="Picture"><div>
-		<h2>And place any picture</h2>
-		<img src="pictures/picture.jpg" alt="">
-	</div></section>
-	<section class="slide"><div>
-		<h2>Inner navigation</h2>
-		<ol>
-			<li>Lets you change objects one by one</li>
-			<li class="next">For example, show list items</li>
-			<li class="next">Or switch pictures</li>
-			<li class="next">And much more</li>
-			<li class="next">But it will work only once</li>
-		</ol>
-	</div></section>
-	<section class="slide"><div>
-		<h2>Shower Presentation Engine</h2>
-		<p>Vadim Makeev, Opera Software</p>
+		<h2>Books</h2>
+		<img src="pictures/the-cucumber-book.jpg" alt="The Cucumber Book">
+		<img src="pictures/cucumber-recipes.jpg" alt="Cucumber Recipes">
 		<ul>
-			<li><a href="http://pepelsbey.net">pepelsbey.net</a></li>
-			<li><a href="http://twitter.com/pepelsbey">twitter.com/pepelsbey</a></li>
-			<li><a href="mailto:pepelsbey@gmail.com">pepelsbey@gmail.com</a></li>
+			<li><a href="http://pragprog.com/book/hwcuc/the-cucumber-book">pragprog.com/book/hwcuc/the-cucumber-book</a></li>
+			<li><a href="http://pragprog.com/book/dhwcr/cucumber-recipes">pragprog.com/book/dhwcr/cucumber-recipes</a></li>
 		</ul>
-		<p>Shower: <a href="https://github.com/shower/shower">github.com/shower/shower</a></p>
 	</div></section>
-	<p class="badge"><a href="https://github.com/shower/shower">Fork me on Github</a></p>
+	<section class="slide"><div>
+		<h2>References</h2>
+		<ul>
+			<li><a href="http://cukes.info/">cukes.info/</a></li>
+			<li><a href="https://github.com/cucumber/cucumber-js">github.com/cucumber/cucumber-js</a></li>
+			<li><a href="http://en.wikipedia.org/wiki/Behavior-driven_development">en.wikipedia.org/wiki/Behavior-driven_development</a></li>
+		</ul>
+		<p class="note">Shower: <a href="https://github.com/shower/shower">github.com/shower/shower</a></p>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Cucumber <img src="pictures/cucumber-64x64.png" alt="Cucumber Logo"></h2>
+		<p>Behrang Noruzinia</p>
+		<p>Questions?</p>
+		<ul>
+			<li><a href="https://github.com/behrang">github.com/behrang</a></li>
+			<li><a href="http://vimeo.com/behrang">vimeo.com/behrang</a></li>
+			<li><a href="mailto:behrangn@gmail.com">behrangn@gmail.com</a></li>
+		</ul>
+	</div></section>
 	<!--
 		To hide progress bar from entire presentation
 		just remove “progress” element.
 		-->
 	<div class="progress"><div></div></div>
+
 	<script src="shower/shower.min.js"></script>
 	<script src="sh/shCore.js"></script>
 	<script src="sh/shBrushJScript.js"></script>
 	<script src="sh/shBrushGherkin.js"></script>
-	<script>SyntaxHighlighter.all();</script>
-	<!-- Copyright © 2011 Behrang Noroozinia, http://github.com/behrang -->
+	<script src="sh/shBrushPlain.js"></script>
+	<script src="sh/shBrushBash.js"></script>
+	<script>
+		SyntaxHighlighter.defaults['toolbar'] = false;
+		SyntaxHighlighter.defaults['tab-size'] = 2;
+		SyntaxHighlighter.all();
+	</script>
+	<!-- Copyright © 2011 Behrang Noruzinia, http://github.com/behrang -->
 </body>
 </html>
