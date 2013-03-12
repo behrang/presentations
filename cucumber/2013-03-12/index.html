@@ -453,18 +453,6 @@
 		</ul>
 	</div></section>
 	<section class="slide"><div>
-		<h2>Declarative vs. Imperative</h2>
-		<blockquote>
-			<p>The scenarios are ideally phrased declaratively rather than imperatively - in the business language, with no reference to elements of the UI through which the interactions take place.</p>
-		</blockquote>
-	</div></section>
-	<section class="slide"><div>
-		<h2>Cucumber &amp; Documentation</h2>
-		<blockquote>
-			<p>Cucumber features are living documentation</p>
-		</blockquote>
-	</div></section>
-	<section class="slide"><div>
 		<h2>Gherkin Example 1</h2>
 		<pre class="brush: gherkin;">
 			Feature: Google for Cucumber
@@ -496,10 +484,70 @@
 			      | B205        |</pre>
 	</div></section>
 	<section class="slide"><div>
-		<h2>Integration, System and Acceptance Tests</h2>
+		<h2>Declarative vs. Imperative</h2>
+		<blockquote>
+			<p>The scenarios are ideally phrased declaratively rather than imperatively - in the business language, with no reference to elements of the UI through which the interactions take place.</p>
+		</blockquote>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Bad Example, Login</h2>
+		<pre class="brush: gherkin;">
+			Scenario: Successful login
+			  Given a user "Aslak" with password "xyz"
+			  And I am on the login page
+			  And I fill in "User name" with "Aslak"
+			  And I fill in "Password" with "xyz"
+			  When I press "Log in"
+			  Then I should see "Welcome, Aslak"</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Bad Example, Login Before Each Scenario</h2>
+		<pre class="brush: gherkin;">
+			Background: A logged in user
+			  Given a user "Aslak" with password "xyz"
+			  And I am on the login page
+			  And I fill in "User name" with "Aslak"
+			  And I fill in "Password" with "xyz"
+			  When I press "Log in"
+			  Then I should see "Welcome, Aslak"</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Login Example</h2>
+		<pre class="brush: gherkin;">
+			Scenario: User is greeted upon login
+			  Given the user "Aslak" has an account
+			  When he logs in
+			  Then he should see "Welcome, Aslak"</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Login Example, For Each Scenario</h2>
+		<pre class="brush: gherkin;">
+			Background: The user is logged in
+			  Given a logged in user
+
+			Scenario: Upload a picture
+			  # Some steps here</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Cucumber &amp; Documentation</h2>
+		<blockquote>
+			<p>Cucumber features are living documentation</p>
+		</blockquote>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Integration and Acceptance Tests</h2>
 		<p>Cucumber is better used for end to end (integration or system) testing.</p>
 		<p>Use cucumber for acceptance tests of user stories.</p>
 		<p>Don't use for unit tests.</p>
+	</div></section>
+	<section class="slide"><div>
+		<h2>BDD Tools For Unit Test</h2>
+		<ul>
+			<li>RSpec (Ruby)</li>
+			<li>Mocha (JS)</li>
+			<li>Jasmine (JS)</li>
+			<li>...</li>
+		</ul>
 	</div></section>
 	<section class="slide"><div>
 		<h2>Agile Process</h2>
