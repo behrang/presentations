@@ -2,16 +2,16 @@
 
 This repository contains slides and code samples from my presentations.
 
-### [Cucumber](http://behrang.github.com/presentations/cucumber/2013-03-12/)
+### [Cucumber](http://behrang.github.io/presentations/cucumber/2013-03-12/)
 
 Saman Pardazeshgaran - March 12, 2013
 
-http://behrang.github.com/presentations/cucumber/2013-03-12/
+http://behrang.github.io/presentations/cucumber/2013-03-12/
 
 ---
 
-### [Node.js](http://behrang.github.com/presentations/node.js/2011-09-07/)
+### [Node.js](http://behrang.github.io/presentations/node.js/2011-09-07/)
 
 Tosan Tech Talk - September 7, 2011
 
-http://behrang.github.com/presentations/node.js/2011-09-07/
+http://behrang.github.io/presentations/node.js/2011-09-07/
