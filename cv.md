@@ -11,13 +11,15 @@ LinkedIn: [linkedin.com/in/behrangn](http://www.linkedin.com/in/behrangn)
 
 ## Summary
 
-Detail oriented software developer and product designer.
+I create software products. I also help teams to create software products. I have experience in different parts of software development process; from talking to customers, understanding their real requirements, creating mock-ups and prototypes, improving user interface and user experience, to architectural design of the software, storage and retrieval requirements and performance, securing applications, and improving the development process.
+
+I value simplicity over complexity and openness and transparency over obscurity. As software technology is moving very fast, I try to always keep myself up to date. I also try to help people improve their skills by teaching them what I have learned and pushing them forward.
 
 ## Experience
 
 ### Software Developer
 Pardazeshgaran Saman  
-June 2012 – Present
+June 2012 – May 2013 (1 year)
 
 Web application development, development process improvement, user experience design, team building, teaching, improving security, product design.
 
@@ -25,11 +27,19 @@ Web application development, development process improvement, user experience de
 Tosan  
 January 2008 – May 2012 (4 years 5 months)
 
-Server side and web application development, development process improvement, user experience design, team administration, team building, teaching, improving security, product design.
+Server side application development, web application development, development process improvement, user experience design, team administration, team building, teaching, improving security, product design.
 
 ### Software Developer
 Pardazeshgar  
 June 2006 – December 2007 (1 year 7 months)
+
+Web application development.
+
+### Software Developer
+Khorshid Chehr  
+January 2003 – May 2006 (3 years 5 months)
+
+Web application development.
 
 ## Projects
 
@@ -48,7 +58,7 @@ Chapar replaced it and solved many of the problems of the old system. It was des
 ### Internet Banking
 April 2010
 
-Improved the design and developed third generation of Internet Banking application. Old products were not stable and their performance was very bad. Some of the problems were: storing everything in user session storage, few JavaServlet classes handling everything, every request being a POST, double form submission, unwanted money transfer by using browser back button!, different code style for different parts of the project, bad conflicting CSS styles, including big uncompressed JavaScript files for doing nearly nothing, XSS holes, CSRF holes and etc.
+Improved the design and developed third generation of Internet Banking application. Old products were not stable and their performance was very bad. Some of the problems were storing everything in user session storage, few JavaServlet classes handling everything, every request being a POST, double form submission, unwanted money transfer by using browser back button!, different code style for different parts of the project, bad conflicting CSS styles, including big uncompressed JavaScript files for doing nearly nothing, XSS holes, CSRF holes and etc. 
 
 I designed and help develop a new application with User Experience, Security, Performance and Maintainability in mind. The new app was a lot faster and safer. User interface was a lot simpler. Many features added because of improved maintainability. Also some AJAX features added to improve usability.
 
