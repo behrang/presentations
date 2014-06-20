@@ -36,7 +36,7 @@
 <body class="list">
 	<header class="caption">
 		<h1>Node.js</h1>
-		<p>Behrang Noruzi Niya</p>
+		<p><a href="http://behrang.github.io/">Behrang Noruzi Niya</a></p>
 	</header>
 	<div class="slide bg" id="Cover"><div>
 		<section>
@@ -408,7 +408,7 @@
 			    setTimeout(function() {
 			        console.log('world');
 			    }, 2000);
-			    
+
 			    console.log('hello');</pre>
 		</section>
 	</div></div>
@@ -421,7 +421,7 @@
 			    setTimeout(function() {
 			        console.log('world');
 			    }, 2000);
-			    
+
 			    console.log('hello');</pre>
 		    <p>A program which prints "hello", waits 2 seconds, outputs "world", and then exits.</p>
 		    <p>Node exits automatically when there is nothing else to do.</p>
@@ -519,11 +519,11 @@
 
                 http.createServer(function (req, res) {
                     res.writeHead(200);
-                    
+
                     setTimeout(function () {
                         res.end('world\n');
                     }, 2000);
-                    
+
                     res.write('hello\n');
                 }).listen(8000);</pre>
 		</section>
@@ -553,11 +553,11 @@
                 http.createServer(function (req, res) {
                     var query = req.url.replace('/', '');
                     res.write('query: ' + query + '\n');
-                    
+
                     dns.resolve(query, function (err, addresses) {
                         res.end(JSON.stringify(addresses) + '\n');
                     });
-                    
+
                 }).listen(8000);</pre>
 		</section>
 	</div></div>
@@ -608,7 +608,7 @@
                 var net = require('net');
 
                 var people = [];
-                
+
                 net.createServer(function (socket) {
                     people.push(socket);
                     socket.on('data', function (data) {
@@ -787,9 +787,9 @@
 			</header>
 			<pre class="brush: js; toolbar: false; highlight: [1, 3, 5];">
                 var w = new Worker('fib.js');
-                
+
                 w.postMessage({ calculate: 10 });
-                
+
                 w.onmessage = function(m) {
                    console.log('result: %j', m);
                     w.terminate();
@@ -843,7 +843,7 @@
                     res.writeHead(200);
                     res.end('hello from ' + process.pid + '\n');
                 });
-                
+
                 var c = net.createConnection('/tmp/node_server.sock');
                 c.on('fd', function (fd) {
                     web.listenFD(fd);

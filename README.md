@@ -2,6 +2,8 @@
 
 This repository contains slides and code samples from my presentations.
 
+My blog is here: [http://behrang.github.io](http://behrang.github.io)
+
 ### [Cucumber](http://behrang.github.io/presentations/cucumber/2013-03-12/)
 
 Saman Pardazeshgaran - March 12, 2013
