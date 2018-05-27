@@ -4,6 +4,16 @@ This repository contains slides and code samples from my presentations.
 
 My blog is here: [http://behrang.github.io](http://behrang.github.io)
 
+---
+
+### [Open-Source](http://behrang.github.io/presentations/open-source/2015-02-12/)
+
+Anthropology.ir Meeting - February 12, 2015
+
+http://behrang.github.io/presentations/open-source/2015-02-12/
+
+---
+
 ### [Cucumber](http://behrang.github.io/presentations/cucumber/2013-03-12/)
 
 Saman Pardazeshgaran - March 12, 2013
